@@ -442,3 +442,353 @@ public class ColecaoHashSet {
 ```
 
 > Não é possível pegar elementos pelo index no HashSet igual é feito no ArrayList
+
+- `Programação Orientada a Objetos (POO)`
+
+> Packages são as pastas que estruturam o projeto
+
+> Definindo uma classe com objetos por exemplo uma pessoa
+
+```java
+package pessoa;
+
+public class Pessoa {
+
+  String nome;
+  int idade;
+  String cpf;
+}
+```
+
+> Métodos da classe que podem ocorrer ações. Os métodos são compostos por (tipo, nome e abre parenteses). O método pode ou não receber argumentos e quando for void para métodos sem retorno.
+
+```java
+package pessoa;
+
+public class Pessoa {
+
+  String nome;
+  int idade;
+  String cpf;
+
+  @Override
+  public String toString() {
+    return "O nome da pessoa é " + nome + ", sua idade é " + idade + " e o seu documento CPF é " + cpf;
+  }
+
+}
+```
+
+```java
+package pessoa;
+
+public class TesteDePessoa {
+
+  public static void main(String[] args) {
+    Pessoa pessoa1 = new Pessoa();
+
+    pessoa1.nome = "Bruno";
+    pessoa1.cpf = "11122233344";
+    pessoa1.idade = 35;
+
+    System.out.println(pessoa1.toString());
+    System.out.println("----------------");
+
+    Pessoa pessoa2 = new Pessoa();
+
+    pessoa2.nome = "Jéssica";
+    pessoa2.cpf = "44433322211";
+    pessoa2.idade = 32;
+
+    System.out.println(pessoa2.toString());
+
+  }
+}
+```
+
+- `Encapsulamento`
+
+> Principio que ele envolve a proteção dos dados de uma classe para proteger os dados, ter controle de acesso e assim tornar a aplicação segura. Uma classe torna-se encapsulada quando seus dados se tornam private onde é removida toda visualização e manipulação de informações dos dados. A partir dai cria-se getter and setters, métodos construtores, hashcode and equals, dentre outros métodos que podem ser criados. O legal é analisar o que cada método faz por exemplo o hashcode and equals que faz uma validação com dados onde não deixa duplicar itens de forma intencional.
+
+> Construtor é um método da classe que ele é chamado automáticamente quando o objeto da classe é criado
+
+```java
+package conta;
+
+public class ContaBancaria {
+
+  private String numero;
+  private String titular;
+  private double saldo;
+
+  // Método Construtor
+  public ContaBancaria() {
+    this.saldo = 0.0;
+  }
+
+  // Getters and Setters
+  public String getNumero() {
+    return numero;
+  }
+
+  public void setNumero(String numero) {
+    this.numero = numero;
+  }
+
+  public String getTitular() {
+    return titular;
+  }
+
+  public void setTitular(String titular) {
+    this.titular = titular;
+  }
+
+  public double getSaldo() {
+    return saldo;
+  }
+
+  public void setSaldo(double saldo) {
+    this.saldo = saldo;
+  }
+
+  // Depositar
+  void depositar(double valor) {
+    if (valor > 0) {
+      saldo = saldo + valor;
+      System.out.println("Depósito de R$ " + valor + ". Seu saldo atual é de R$ " + saldo + ".");
+    } else {
+      System.out.println("Valor de depósito inválido!");
+    }
+  }
+
+  // Sacar
+  void sacar(double valor) {
+    if (valor > 0 && valor <= saldo) {
+      saldo = saldo - valor;
+      System.out.println("Saque de R$ " + valor + ". Saldo atual R$ " + saldo);
+    }
+  }
+
+}
+
+```
+
+```java
+package conta;
+
+public class TesteContaBancaria {
+
+  public static void main(String[] args) {
+
+    ContaBancaria contaBancaria1 = new ContaBancaria();
+    contaBancaria1.setNumero("9999");
+    contaBancaria1.setTitular("João Felipe");
+
+    contaBancaria1.depositar(450);
+    contaBancaria1.sacar(200);
+  }
+}
+
+```
+
+- `Herança`
+
+> Uma classe herda algo de outra classe, como por exemplo um pouco acima existe a classe pessoa e nessa classe consta algumas variáveis definidas e em algum outro momento você vai precisar criar mais duas classes, porém essas classes vão herdar os atributos da classe pessoa, isso se chama herança. Para que ela possa ser herdada, nas novas classes deve se colocar na frente no nome da class o valor "extends Pessoa".
+
+```java
+package pessoa;
+
+public class Professor extends Pessoa {
+
+  private double salario;
+
+  public double getSalario() {
+    return salario;
+  }
+
+  public void setSalario(double salario) {
+    this.salario = salario;
+  }
+}
+
+```
+
+- `Polimorfismo`
+
+> São quando nossos atributos tem formas distintas e podemos dar implementações diferente a eles. Por exemplo ao método professor, recebe a String para passar o texto de pessoa e com um super podemos incrementar inserindo mensagem de cada classe.
+
+```java
+package pessoa;
+
+public class Aluno extends Pessoa {
+
+  private String matricula;
+
+  public String getMatricula() {
+    return matricula;
+  }
+
+  public void setMatricula(String matricula) {
+    this.matricula = matricula;
+  }
+
+  @Override
+  public String toString() {
+    System.out.println(super.toString());
+    return "É o aluno";
+  }
+
+}
+```
+
+> Outra forma de se usar o polimorfismo é criando uma interface. Diferente das outras quando é interface precisa ser implementada. As interface não podem ser instanciadas com new ...()
+
+```java
+package veiculos;
+
+public interface Veiculo {
+
+  void acelerar();
+
+  void frear();
+}
+```
+
+```java
+package veiculos;
+
+public class Carro implements Veiculo {
+
+  @Override
+  public void acelerar() {
+    System.out.println("Acelerando o carro");
+  }
+
+  @Override
+  public void frear() {
+    System.out.println("Freando o carro");
+  }
+}
+```
+
+```java
+package veiculos;
+
+public class TesteDeVeiculo {
+
+  public static void main(String[] args) {
+    Veiculo carro = new Carro();
+    Veiculo moto = new Moto();
+
+    carro.acelerar();
+    carro.frear();
+
+    moto.acelerar();
+    moto.frear();
+  }
+}
+```
+
+- `Exceções`
+
+> Existem dois tipos de exceções em java, são as verificadas e não verificadas. Exceções são criadas para tratar os erros.
+
+> verificadas são aquelas que o compilador do java exige que voce trate as exceções, são as previstas.
+
+> não verificadas são as exceções que o compilador não reconhece que vai dar o erro, as inesperadas.
+
+```java
+package excecoes;
+
+import pessoa.Pessoa;
+
+public class Excecoes {
+
+  public static void main(String[] args) {
+    // // TRY/CATCH
+    // try {
+    // validaNumero();
+    // } catch (Exception e) {
+    // System.out.println("Deu ruim");
+    // e.printStackTrace();
+    // }
+
+    Pessoa p = null;
+    p.getCpf();
+
+  }
+
+  public static void validaNumero() throws Exception {
+    int numero = 10;
+    if (numero < 100) {
+      // Checked exceptions
+      throw new Exception("O número é menor que 100");
+    }
+  }
+  // Unchecked exceptions
+}
+
+```
+
+- `Construtor`
+
+> É um metodo que é chamado quando um objeto é criado, ele também pode ser utilizado para inicializar um atributo. O construtor precisa ter o nome da classe. Um construtor não possui retorno onde automaticamente ele é um VOID. Pode ser um construtor vazio ou com parametros. O mesmo construtor pode ser instanciado mais de uma vez. Quando uma classe é criada sem construtor definido, automaticamente o java irá criar um porém sem parametros.
+
+```java
+package construtor;
+
+public class Construtor {
+
+  private int numero;
+
+  public Construtor(int numero) {
+    this.numero = numero;
+  }
+
+  public int getNumero() {
+    return numero;
+  }
+
+  public void setNumero(int numero) {
+    this.numero = numero;
+  }
+
+}
+```
+
+```java
+package construtor;
+
+public class TesteDeConstrutor {
+
+  public static void main(String[] args) {
+
+    Construtor construtor = new Construtor(35);
+
+    System.out.println(construtor);
+  }
+}
+```
+
+- `Wrapper Classes`
+
+> Objeto para embrulhar os dados do tipo primitivo. Permite ter acesso as propriedades de cada tipo primitivo. No Wrapper é possível definir um valor nulo e no tipo primitivo não é possível.
+
+```java
+package wrapper;
+
+public class Wrapper {
+
+  public static void main(String[] args) {
+
+    int tipoInt = 1;
+    float tipoFloat = 1;
+    boolean tipoBoolean = false;
+
+    Float tipFloat2 = 1F;
+    Boolean tipoBoolean2 = false;
+    Integer tipoInteger = 1;
+
+  }
+}
+```
