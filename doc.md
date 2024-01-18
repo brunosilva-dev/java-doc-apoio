@@ -37,7 +37,7 @@ public class HelloWorld {
 }
 ```
 
-- Tipos de dados
+- `Tipos de dados`
 
 > Number (int, double, float, long) - Quando a variável for do tipo float, é preciso que coloque o "f" na frente do número; Long é para armazenar número muito grandes e é necessário colocar o L na frente
 > String
@@ -76,7 +76,7 @@ public class HelloWorld {
 }
 ```
 
-- Condicionais
+- `Condicionais`
 
 > if / else
 
@@ -257,7 +257,7 @@ public class HelloWorld {
 }
 ```
 
-- Lista
+- `Lista`
 
 > Para utilizar o lista é preciso fazer o "import java.util.List;"
 
@@ -294,7 +294,7 @@ List<String> nomes = new ArrayList<>();
 nomes.add();
 ```
 
-- Utilizando o for, foreach e método de referência para percorrer uma lista
+- Utilizando o for, foreach e método de referência para percorrer uma `lista`
 
 ```java
 // FOR
@@ -360,3 +360,85 @@ public class EstruturaDeDados {
   }
 }
 ```
+
+- `MAP`
+
+> O map é uma coleção onde consegue colocar chave e valor para dentro da estrutura, será preciso definir qual é o tipo da chave e o tipo do valor da estrutura. Na declaração do tipo de valor da estrutura, o map não aceita a variáveis primitivas
+
+```java
+Map<String, Integer> notas = new HashMap<>();
+```
+
+> No map para adicionar não é mais possível com add mas agora usasse .put(valor1, valor2). A partir do java 10 é possivel declarar variáveis utilizando var podendo utilizar somente nos casos onde o tipo já é definido como no hash abaixo
+
+```java
+import java.util.HashMap;
+import java.util.Map;
+
+public class Colecoes {
+
+  public static void main(String[] args) {
+
+    Map<String, Integer> notas = new HashMap<>();
+    notas.put("Bruno Silva", 8);
+    notas.put("Jessica Sanches", 9);
+    notas.put("João Felipe", 10);
+
+    var nota = notas.get("Bruno Silva");
+    System.out.println(nota);
+  }
+}
+```
+
+> Percorrendo o HashMap de forma diferente do FOR. O Map retorna sempre a última chave, então se tiver várias chaves iguais só será retornado a última inserida
+
+```java
+import java.util.HashMap;
+import java.util.Map;
+
+public class Colecoes {
+
+  public static void main(String[] args) {
+
+    Map<String, Integer> notas = new HashMap<>();
+    notas.put("Bruno Silva", 8);
+    notas.put("Jessica Sanches", 9);
+    notas.put("João Felipe", 10);
+
+    var nota = notas.get("Bruno Silva");
+    System.out.println(nota);
+
+    for (Map.Entry<String, Integer> entry : notas.entrySet()) {
+      String key = entry.getKey();
+      Integer value = entry.getValue();
+
+      System.out.println("A chave é " + key + "e o valor é " + value);
+    }
+  }
+}
+```
+
+- `HashSet`
+
+> É uma coleção de elementos únicos onde na chave tem somente o valor e a forma de adição dele é parecida com a List
+
+```java
+import java.util.HashSet;
+
+public class ColecaoHashSet {
+
+  public static void main(String[] args) {
+
+    HashSet<Integer> numeros = new HashSet<>();
+    numeros.add(10);
+    numeros.add(11);
+    numeros.add(12);
+    numeros.add(13);
+
+    System.out.println(numeros.size());
+  }
+}
+
+```
+
+> Não é possível pegar elementos pelo index no HashSet igual é feito no ArrayList
